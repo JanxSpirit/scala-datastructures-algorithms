@@ -40,4 +40,11 @@ object Core {
       else issubstr(str.drop(1), find)
     }
   }
+
+  def escSpaces(str: String): String =
+    if (str.size < 1) str
+    else {
+      if (str(0) == ' ') "%20" + escSpaces(str.drop(1))
+      else str(0) + escSpaces(str.drop(1))
+    }
 }
