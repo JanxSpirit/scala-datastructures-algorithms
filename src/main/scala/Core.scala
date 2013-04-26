@@ -37,12 +37,12 @@ object Core {
  */
 
   //determine whether a string is a substring of another
-  def issubstr(str: String, find: String): Boolean = {
+  def isSubstr(str: String, find: String): Boolean = {
     if (str.size < 1 || find.size < 1) false
-    if (find.size == 1) str(0) == find(0)
+    else if (find.size == 1) str(0) == find(0)
     else {
-      if (find(0) == str(0)) issubstr(str.drop(1), find.drop(1))
-      else issubstr(str.drop(1), find)
+      if (find(0) == str(0)) isSubstr(str.drop(1), find.drop(1))
+      else isSubstr(str.drop(1), find)
     }
   }
 
@@ -63,4 +63,9 @@ object Core {
         }
     charcount(str1).corresponds(charcount(str2))((x, y) => x == y)
   }
+
+  def isRotation(str1: String, str2: String): Boolean = 
+    if (str1.size != str2.size) false
+    else isSubstr(str1+str1, str2)
+
 }
