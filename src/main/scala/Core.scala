@@ -54,10 +54,13 @@ object Core {
     }
 
   def isAnagram(str1: String, str2: String): Boolean = {
-    def charcount(s: String, m: Map[Char, Int] = Map[Char, Int]()): 
-    Map[Char, Int] = 
-      if (s.size < 1) m
-      else charcount(s.drop(1),  m + (s(0) -> (m.getOrElse((s(0)), 0) + 1)))
-    charcount(str1) == charcount(str2)
+    def charcount(s: String, a: Array[Int] = 
+      Array.ofDim[Int](128)): Array[Int] = 
+        if (s.size < 1) a
+        else {
+          a(s(0).toInt) += 1
+          charcount(s.drop(1), a)
+        }
+    charcount(str1).corresponds(charcount(str2))((x, y) => x == y)
   }
 }
