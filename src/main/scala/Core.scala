@@ -31,6 +31,11 @@ trait LNode[+T] {
 }
 
 object Core {
+
+/**
+ * String questions
+ */
+
   //determine whether a string is a substring of another
   def issubstr(str: String, find: String): Boolean = {
     if (str.size < 1 || find.size < 1) false
@@ -47,4 +52,12 @@ object Core {
       if (str(0) == ' ') "%20" + escSpaces(str.drop(1))
       else str(0) + escSpaces(str.drop(1))
     }
+
+  def isAnagram(str1: String, str2: String): Boolean = {
+    def charcount(s: String, m: Map[Char, Int] = Map[Char, Int]()): 
+    Map[Char, Int] = 
+      if (s.size < 1) m
+      else charcount(s.drop(1),  m + (s(0) -> (m.getOrElse((s(0)), 0) + 1)))
+    charcount(str1) == charcount(str2)
+  }
 }
